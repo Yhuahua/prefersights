@@ -3,8 +3,13 @@ import ReactDOM from 'react-dom'
 import Sights from './Sights'
 import './scss/Sights.scss'
 
-const SightSeeing : React.FC = () => {
+type UserInfo = {
+    entityid: string
+};
 
+const SightSeeing : React.FC<UserInfo> = (user:UserInfo) => {
+
+    const [entityId, setEntityId] = useState<string>(user.entityid);
     const [sights, setSights] = useState<React.ReactElement[]>([]);
 
     const getCount = ():number => {
@@ -28,13 +33,15 @@ const SightSeeing : React.FC = () => {
    
     return (
         <>
-        <div className="container">
-        <div className="portal">
-            <ul className="sights">
-                {sights}
-            </ul>
-        </div>
-        </div>
+        <span>{entityId}</span>
+
+            <div className="container">
+                <div className="portal">
+                    <ul className="sights">
+                        {sights}
+                    </ul>
+                </div>
+            </div>
         </>
     );
 }
@@ -42,5 +49,10 @@ const SightSeeing : React.FC = () => {
 export default SightSeeing;
 
 if (document.getElementById('root')) {
-    ReactDOM.render(<SightSeeing />, document.getElementById('root'));
+    const root = document.getElementById('root');
+
+    if(root != null) {
+        const props = Object.assign({}, root.dataset);
+        ReactDOM.render(<SightSeeing entityid={props.entityid || 'll'} />, root);
+    }
 }

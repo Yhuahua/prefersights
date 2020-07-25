@@ -9,7 +9,6 @@ const Sights : React.FC = () => {
     const [options, setOptions] = useState<string[]>(['1','2','3','4','5'])
 
     return(
-
         <>
             <div className="sight">
                 <table>

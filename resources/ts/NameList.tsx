@@ -11,3 +11,5 @@ type ImageList = {
 export const ImgList:ImageList = {
     img_sample: 'https://p2.bahamut.com.tw/S/2KU/17/336a1240a833a8fa514632401f19c6t5.JPG?w=300'
 }
+
+export const ComboList:string[] = ["座標","停車位","住宿","溫度","溼度"];

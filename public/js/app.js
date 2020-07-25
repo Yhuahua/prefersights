@@ -66418,7 +66418,7 @@ module.exports = function(module) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ImgList = exports.NameList = void 0;
+exports.ComboList = exports.ImgList = exports.NameList = void 0;
 exports.NameList = {
     sight_name: "景點名稱",
     sight_coord: "座標方位",
@@ -66427,6 +66427,7 @@ exports.NameList = {
 exports.ImgList = {
     img_sample: 'https://p2.bahamut.com.tw/S/2KU/17/336a1240a833a8fa514632401f19c6t5.JPG?w=300'
 };
+exports.ComboList = ["座標", "停車位", "住宿", "溫度", "溼度"];
 
 
 /***/ }),
@@ -66533,34 +66534,40 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
-var Sights_1 = __importDefault(__webpack_require__(/*! ./Sights */ "./resources/ts/components/Sights.tsx"));
+const react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
+const Sights_1 = __importDefault(__webpack_require__(/*! ./Sights */ "./resources/ts/components/Sights.tsx"));
 __webpack_require__(/*! ./scss/Sights.scss */ "./resources/ts/components/scss/Sights.scss");
-var SightSeeing = function () {
-    var _a = react_1.useState([]), sights = _a[0], setSights = _a[1];
-    var getCount = function () {
+const SightSeeing = (user) => {
+    const [entityId, setEntityId] = react_1.useState(user.entityid);
+    const [sights, setSights] = react_1.useState([]);
+    const getCount = () => {
         return 10;
     };
     function getSights() {
-        var sights = [];
-        var count = getCount();
+        let sights = [];
+        const count = getCount();
         for (var i = 0; i < count; i++) {
             sights.push(react_1.default.createElement(Sights_1.default));
         }
         return sights;
     }
-    react_1.useEffect(function () {
+    react_1.useEffect(() => {
         setSights(getSights());
     }, []);
     return (react_1.default.createElement(react_1.default.Fragment, null,
+        react_1.default.createElement("span", null, entityId),
         react_1.default.createElement("div", { className: "container" },
             react_1.default.createElement("div", { className: "portal" },
                 react_1.default.createElement("ul", { className: "sights" }, sights)))));
 };
 exports.default = SightSeeing;
 if (document.getElementById('root')) {
-    react_dom_1.default.render(react_1.default.createElement(SightSeeing, null), document.getElementById('root'));
+    const root = document.getElementById('root');
+    if (root != null) {
+        const props = Object.assign({}, root.dataset);
+        react_dom_1.default.render(react_1.default.createElement(SightSeeing, { entityid: props.entityid || 'll' }), root);
+    }
 }
 
 
@@ -66595,11 +66602,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-var NameList_1 = __webpack_require__(/*! ../NameList */ "./resources/ts/NameList.tsx");
-var Sights = function () {
-    var _a = react_1.useState(NameList_1.ImgList.img_sample), im = _a[0], setIM = _a[1];
-    var _b = react_1.useState(['1', '2', '3', '4', '5']), options = _b[0], setOptions = _b[1];
+const react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const NameList_1 = __webpack_require__(/*! ../NameList */ "./resources/ts/NameList.tsx");
+const Sights = () => {
+    const [im, setIM] = react_1.useState(NameList_1.ImgList.img_sample);
+    const [options, setOptions] = react_1.useState(['1', '2', '3', '4', '5']);
     return (react_1.default.createElement(react_1.default.Fragment, null,
         react_1.default.createElement("div", { className: "sight" },
             react_1.default.createElement("table", null,
