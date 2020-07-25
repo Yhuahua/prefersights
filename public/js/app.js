@@ -66554,8 +66554,9 @@ var SightSeeing = function () {
         setSights(getSights());
     }, []);
     return (react_1.default.createElement(react_1.default.Fragment, null,
-        react_1.default.createElement("div", { className: "portal" },
-            react_1.default.createElement("ul", { className: "sights" }, sights))));
+        react_1.default.createElement("div", { className: "container" },
+            react_1.default.createElement("div", { className: "portal" },
+                react_1.default.createElement("ul", { className: "sights" }, sights)))));
 };
 exports.default = SightSeeing;
 if (document.getElementById('root')) {

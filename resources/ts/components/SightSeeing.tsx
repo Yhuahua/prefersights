@@ -28,10 +28,12 @@ const SightSeeing : React.FC = () => {
    
     return (
         <>
+        <div className="container">
         <div className="portal">
             <ul className="sights">
                 {sights}
             </ul>
+        </div>
         </div>
         </>
     );
